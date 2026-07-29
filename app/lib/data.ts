@@ -17,7 +17,7 @@ export async function fetchRevenue() {
     // Don't do this in production :)
 
     // console.log('Fetching revenue data...');
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 10000));
 
     const data = await sql<Revenue[]>`SELECT * FROM revenue`;
 
@@ -144,6 +144,7 @@ export async function fetchInvoicesPages(query: string) {
 
 export async function fetchInvoiceById(id: string) {
   try {
+    
     const data = await sql<InvoiceForm[]>`
       SELECT
         invoices.id,
@@ -161,6 +162,7 @@ export async function fetchInvoiceById(id: string) {
     }));
 
     return invoice[0];
+    console.log(invoice); // Invoice is an empty array []
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoice.');
